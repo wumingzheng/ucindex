@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="http://www.ucweb.com/favicon.ico">
+    <title>单页面</title>
+    <link rel="stylesheet" href="public/index_879a24e.css">
+</head>
+
+<body>
+<div id="visual-app"></div>
+<script src="release/jweixin-1.0.0.js"></script>
+
+<script type="text/ejs" id="tpl">
+    <div id="pop_black_mask" style="position:absolute;top:0;right:0;bottom:0;left:0;opacity:0.8;background:#000;"></div>
+
+    <div id="pop_info" style="position:fixed;left:35px;right:35px;top:75px;bottom:85px;font-size:12px;overflow:scroll;">
+        <div class="pop-head" style="padding-bottom:10px;background:url(http://image.uc.cn/s/uae/g/01/visual/18/pop-bg.png) no-repeat;background-size:cover;">
+            <div class="pop-avatar" style="background:#d23231;width:0.174rem;height:0.174rem;border-radius:50%;text-align:center;line-height:90px;margin:auto;">
+                <div style="position:relative;right:0.001rem;top:0.004rem;background:url(<%=image%>);background-size:cover;border-radius:50%;width:100%;height:100%;"></div>
+            </div>
+            <div style="color:#fff;text-align:center;margin-top:12px;font-size:14px;" class="light-grey">
+                <span><span class="tbold" style="color: #fff;">姓名:&nbsp;</span><%=name%>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span><span class="tbold" style="color: #fff;">性别:&nbsp;</span><%=sex%></span>
+            </div>
+        </div>
+        <div class="pop-body light-grey" style="overflow:hidden;background:#fff;padding:10px 0 10px 0;">
+            <div style="width:90%;margin:auto;"> <span class="tbold">出生日期:&nbsp;</span><%=birthDate%> </div>
+            <div style="width:90%;margin:auto;"> <span class="tbold">失踪日期:&nbsp;</span><%=missDate%> </div>
+            <div style="width:90%;margin:auto;"> <span class="tbold">失踪地点:&nbsp;</span><%=missLocation%> </div>
+
+            <img src="18/pop-dec.png"  class="pop-dec">
+
+            <div style="width:90%;margin:auto;"> <span class="tbold">失踪者特制描述:&nbsp;</span><%=appearance%> </div>
+
+            <img src="18/pop-dec.png"  class="pop-dec">
+
+            <div style="width:90%;margin:auto;"> <span class="tbold">失踪经过:&nbsp;</span><%=missExperience%> </div>
+
+            <img src="18/pop-dec.png"  class="pop-dec">
+
+            <div style="width:90%;margin:auto;"> <span class="tbold">提供线索方式:&nbsp;</span> <span style="color:#ef6161;">1840533</span>（宝贝回家接待群QQ号码） </div>
+
+            <div id="lksdflkadsj" class="model-share-button model" style="margin:auto;margin-top:15px;background: 0 0 url(http://image.uc.cn/s/uae/g/01/visual/18/page7_btn_share.png) no-repeat;background-size: contain;;width: 80%;height: 58px;z-index: 0;opacity: 1;background-color: initial;-webkit-transform: translateZ(0);"></div>
+
+        </div>
+
+        <div id="pop_close" class="pop-close" style="position:absolute;top:0;right:0;width:20px;height:20px;background:url(http://image.uc.cn/s/uae/g/01/visual/18/pop-close.png);background-size:cover;"></div>
+
+    </div>
+</script>
+
+<script type="text/ejs" id="pointTpl">
+    <div style="width:40px;height:5px;margin:auto;">
+        <span id="baby_point0" class="slide-point"></span>
+        <span id="baby_point1" class="slide-point"></span>
+        <span id="baby_point2" class="slide-point"></span>
+    </div>
+</script>
+
+<script>
+    window.CONF = {};
+    window.MSG = {
+        info: [
+            {
+                "name": "别小峰 ",
+                "sex": "男 ",
+                "birthDate": "1985年1月1日",
+                "missDate": "1989年9月27日",
+                "missLocation": "陕西省渭南市富平县觅子乡别家村",
+                "appearance": "圆脸，小眼睛单眼皮，小嘴，矮鼻梁，额头左侧有一个发旋、后背汗毛隐隐约约看见一个大旋，胖胖的身体健康，小时候和妈妈很像，不喜欢说话。渭南富平口音。",
+                "missExperience": "89年09月27日下午一点左右，兄弟俩在渭南市富平县觅子乡别家村家门前附近公路上一起玩耍时，将弟弟别小峰丢失，至今杳无音讯。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/biexiaofeng.jpg"
+
+            },
+            {
+                "name": "马维阳",
+                "sex": "男 ",
+                "birthDate": "1994年11月18日（农历）",
+                "missDate": "1996年12月26日 （农历）",
+                "missLocation": "山西省运城市闻喜县东镇甘泉市场",
+                "appearance": "圆脸，单眼皮，眼睛长得像爸爸。直发。背部到臀部有大面积烫伤（疤痕应该一俩年内就没有了或者变淡）",
+                "missExperience": "失踪当天是腊月二十六日，正逢年集家人都很忙，远远被隔壁家的小姑娘喊出去玩，不慎走失。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/maweiyang.jpg"
+            },
+            {
+                "name": "黄佳辉",
+                "sex": "男 ",
+                "birthDate": "1987年12月03日（阳历）",
+                "missDate": "1993年12月26日（农历）",
+                "missLocation": "湖北省黄冈市蕲春县蕲阳商场附近",
+                "appearance": "两个头旋、单眼皮、额头右上方发间有明显旋涡、是否断掌纹不详、4岁半时做过疝气手术。",
+                "missExperience": "失踪当天是腊月二十六，妈妈去武汉进货，爸爸在守店，下午五点左右，放假在家的兄弟俩在蕲春县蕲阳商场爷爷的渔网店附近玩弹珠，等到爸爸收摊就不见了兄弟俩，多方寻找无果。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/huangjiahui.png"
+            },
+            {
+                "name": "何少鹏",
+                "sex": "男 ",
+                "birthDate": "1985年12月28日（阳历）",
+                "missDate": "1988年4月10日（阳历）",
+                "missLocation": "湖南省岳阳市先锋路百香园影剧院2楼",
+                "appearance": "一个头旋，单眼皮。其他的记不得了。",
+                "missExperience": "1988年4月10日上午10点左右，孩子很听话地一个人在客厅玩，母亲去厕所洗衣服，出来就不见孩子了。家里的门不知道何时被人为打开了，家人立即出去寻找，但至今杳无音讯。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/heshaopeng.jpg"
+            },
+            {
+                "name": "刘鹏飞 ",
+                "sex": "男 ",
+                "birthDate": "1988年8月26日",
+                "missDate": "1992年7月28日",
+                "missLocation": "湖北省武汉市汉阳区晴川街双街",
+                "appearance": "左眉尾有明显缝针疤痕、肚脐眼上有个拇指头大、棕色不规则圆形胎记。",
+                "missExperience": "当天下午14时左右，刘鹏飞和一个女孩在粮食船运队厂门口玩，后小女孩回来描述，她和刘鹏飞一起去买汽水，一转眼就不见刘鹏飞，多方寻找无果。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liupengfei.png"
+            },
+            {
+                "name": "曹学文",
+                "sex": "男 ",
+                "birthDate": "1987年6月23日",
+                "missDate": "1994年9月29日",
+                "missLocation": "四川省达州市北外镇3村10组",
+                "appearance": "额头有疤痕，不记得是哪一边，缝了两三针，在小河沟里摔得，双眼皮，下巴尖，塌鼻子",
+                "missExperience": "村里有条洲河，他常和小孩们一起割草，一起去上学，他堂兄把他骗走，一直没有回来。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/caoxuewen.jpg"
+            },
+            {
+                "name": "陈刚",
+                "sex": "男 ",
+                "birthDate": "1989年3月3日",
+                "missDate": "1992年5月28日",
+                "missLocation": "贵州省贵阳市南明区东门路口",
+                "appearance": "眼睛小，双眼皮，下巴角有颗小黑痣，圆脸，大鼻子，头发密。额头中部有约两针长的小伤疤。  ",
+                "missExperience": "当天上午9点多钟，孩子和邻居家小孩一起在南明区东门路口玩，大约半小时左右，家人发现孩子不见了，两个孩子同时被拐走。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/chengang.jpg"
+            },
+            {
+                "name": "董永",
+                "sex": "男 ",
+                "birthDate": "1990年7月29日（农历） ",
+                "missDate": "1992年正月十五（农历）",
+                "missLocation": "福建省厦门市厦门江头",
+                "appearance": "左手手心手纹比较特别为通关手，颈部后方小片红痣，额头有牛头旋，右手腕有5角钱硬币大小黑痣，白皮肤。",
+                "missExperience": "1992年1月15日在火车站附近，两男子从后面将其母放倒于地，把董永抢走。至今杳无音讯",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/dongyong.jpg"
+            },
+            {
+                "name": "胡孝猛",
+                "sex": "男 ",
+                "birthDate": "1994年11月12日9（农历）",
+                "missDate": "1998年9月5日（农历）",
+                "missLocation": "云南省昆明市西山区黄土坡后街64号",
+                "appearance": "额头有一条白色疤痕，后脑勺靠左脖子有一块胎记，左手胳膊也有一块钨红的胎记。双眼皮，一个头旋。",
+                "missExperience": "1998年9月5日上午孩子一个人去妈妈的修鞋摊位上找妈妈，手拿两根玉米在中途失踪。当时当地一个月内丢失了8个小孩，有一个叫张宁的小孩是通过警方从海南找回来的。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/huxiaomeng.jpg"
+            },
+            {
+                "name": "黄海波 ",
+                "sex": "男 ",
+                "birthDate": "1994年01月29日（农历）",
+                "missDate": "1998年08月23日（阳历） ",
+                "missLocation": "四川省成都市金堂县隆盛镇泉水村铁路旁",
+                "appearance": "一个头旋、头上有一圈白色烫伤，烫伤的地方还有肩部，皮肤颜色一点一点白色，背上有黑色胎记。  ",
+                "missExperience": "失踪当天上午9点在达成铁路隆盛段，一辆白色夏利车开车偷走了两个小孩（黄海波和一个女孩），后来车子大概行驶了4-5公里，把车内的小女孩放下了车，带走了黄海波。 ",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/huanghaibo.jpg"
+            },
+            {
+                "name": "景亚楠",
+                "sex": "男 ",
+                "birthDate": "1990年7月4日",
+                "missDate": "1995年12月3日",
+                "missLocation": "陕西省西安市火车站 ",
+                "appearance": "失踪时5岁，体貌特征不详，说话河南口音。",
+                "missExperience": "1995年12月03日于陕西省西安市火车站被一个50多的男子拐走，至今杳无音讯。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/jingyanan.jpg"
+            },
+            {
+                "name": "巨双亮",
+                "sex": "男 ",
+                "birthDate": "1990年05月28日（阳历）",
+                "missDate": "1998年03月16日（阳历）",
+                "missLocation": "河南省三门峡市湖滨区交口乡野鹿村九组",
+                "appearance": "大眼睛，双眼皮，左胳膊上有一块不大的伤疤，椭圆脸，中等耳朵，小耳垂，小嘴唇。",
+                "missExperience": "1998年03月16日中午吃过饭后自己背着书包去上学了，再也没回来。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/jushuangliang.jpg"
+            },
+            {
+                "name": "李磊",
+                "sex": "男 ",
+                "birthDate": "1991年5月4日",
+                "missDate": "1994年8月8日",
+                "missLocation": "陕西省西安市新城区三府湾村",
+                "appearance": "圆头，单眼皮。额头左侧有有玉米大小粒大小一块凹进去伤疤",
+                "missExperience": "1994年8月8日早上爸爸出去办事，孩子追爸爸，爸爸不知道孩子因此丢失。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/lilei.jpg"
+            },
+            {
+                "name": "李婷",
+                "sex": "女",
+                "birthDate": "1989年02月16日（阴历）",
+                "missDate": "1992年10月10日（阳历）",
+                "missLocation": "江苏省宿迁市泗阳县张家圩镇农庄九组",
+                "appearance": "一个头旋，方脸，后脑平，皮肤白，小嘴，薄嘴唇，大眼睛，双眼皮，后背靠中间的位置有颗痣，左或右大腿内侧有胎记。 ",
+                "missExperience": "1992年10月10日早上6点多，父亲起床后就骑着自行车去邻村加工粮食了，李婷看见爸爸出去了，过了一小会也跟着出去致走失，至今一点消息都没有。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liting.jpg"
+            },
+            {
+                "name": "刘慧明",
+                "sex": "女",
+                "birthDate": "1981年12月21日",
+                "missDate": "1990年4月10日",
+                "missLocation": "内蒙古自治区 包头市昆区",
+                "appearance": "椭圆脸 大眼睛双眼皮",
+                "missExperience": "失踪时上小学二年级，那天学校运动会结束后有人曾经看到她走出校门。之后便一直没有消息。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liuhuiming.png"
+            },
+            {
+                "name": "刘健",
+                "sex": "男 ",
+                "birthDate": "1988年3月7日",
+                "missDate": "1994年2月24日",
+                "missLocation": "河北省衡水市枣强县王均乡刘进伯村",
+                "appearance": "圆脸，双眼皮大眼睛，头顶一个发旋。右眼外眼角上方的发际线处有一个黑色的痦子，不是很大。",
+                "missExperience": "当天4点左右，刘健和妹妹在家里院子玩，刘健非要出院子，妹妹刘燕就把院子大门关起来了，但是刘健从门下边爬出去了，这样再也没有回来。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liujian.jpg"
+            },
+            {
+                "name": "刘凯",
+                "sex": "男 ",
+                "birthDate": "1994年11月12日",
+                "missDate": "1998年6月17日",
+                "missLocation": "河北省邯郸地区武安市石洞乡史二庄村家门口",
+                "appearance": "右耳没有耳垂",
+                "missExperience": "失踪当天刘凯在家门口玩耍时丢失，家门口有一口水井。后来爸爸听人说过在河北省邯郸地区涉县见过和刘凯特征一样的人，但是父母没有找到。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liukai.jpg"
+            },
+            {
+                "name": "刘楠",
+                "sex": "男",
+                "birthDate": "1998年1月31日",
+                "missDate": "1999年7月21日",
+                "missLocation": "陕西省咸阳市秦都区古渡镇西张家堡",
+                "appearance": "圆脸、大眼睛、单眼皮、塌鼻梁、头发稀少发黄、一个发旋、后脑有点凸。",
+                "missExperience": "失踪当天下午五点左右，一位几面之交蹬三轮车的人抱起孩子，父母也没在意，过了两三分钟发现孩子和那个蹬三轮车的人都不见了，至今无孩子线索。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liunan.png"
+            },
+            {
+                "name": "刘璞玉",
+                "sex": "男",
+                "birthDate": "1983年2月2日",
+                "missDate": "1984年6月24日",
+                "missLocation": "河南省郑州火车站",
+                "appearance": "肚脐周围有一大一小两块不太明显的烫伤，左前臂有一块暗胎记，有习惯性的微微歪头。",
+                "missExperience": "孩子在郑州火车站被人抱走，走失时1.5岁，至今未有任何线索。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/liupuyu.png"
+            },
+            {
+                "name": "卢杨",
+                "sex": "女",
+                "birthDate": "1996年8月20日",
+                "missDate": "1999年6月22日",
+                "missLocation": "湖北省武汉市江汉区黄梅县五祖镇",
+                "appearance": "大眼睛，双眼皮，有酒窝。",
+                "missExperience": "家人五点钟左右（刚把孩子从幼儿园接回来）在长江日报后面的高家台装货，大概十五分钟时间发现孩子不见了。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/luyang.jpg"
+            },
+            {
+                "name": "马彬玲",
+                "sex": "女",
+                "birthDate": "1991年2月19日",
+                "missDate": "1996年7月16日",
+                "missLocation": "湖南省邵阳市新邵县严塘镇马何塘往高桥方向",
+                "appearance": "一个手臂上（手衬和手腕之间部位）有一块青色的胎记。",
+                "missExperience": "那天她从外婆家一个人走回爸爸妈妈家，有一段路，半路上有个三岔路口，据有人说是她走错了路，之后就没有了消息。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/mabinling.jpg"
+            },
+            {
+                "name": "马飞熊",
+                "sex": "男",
+                "birthDate": "1977年8月8日",
+                "missDate": "1985年7月1日",
+                "missLocation": "甘肃省定西市临洮县红旗乡红地村",
+                "appearance": "双眼皮，头发自然黄，无其他明显特征",
+                "missExperience": "孩子早上去上学，到中午还没回家，爷爷奶奶就去学校找，学校老师说，孩子早上就没来。至今杳无音讯",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/mafeixiong.jpg"
+            },
+            {
+                "name": "马晓林",
+                "sex": "男",
+                "birthDate": "1992年4月",
+                "missDate": "1997年6月18日",
+                "missLocation": "甘肃省兰州市龚家湾王斌牛肉面馆附近",
+                "appearance": "一个头旋，头发稍稀，后脑稍凸，后脑右低，左稍高，天灵盖高。耳朵稍大，耳垂小。",
+                "missExperience": "1997年6月18日中午，马晓林同往常一样在王斌牛肉面馆附近玩耍，一点左右父母发现不见，至今再无消息",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/maxiaolin.jpg"
+            },
+            {
+                "name": "毛寅",
+                "sex": "男",
+                "birthDate": "1986年2月23日",
+                "missDate": "1988年10月17日",
+                "missLocation": "陕西省西安市西大街金铃酒店",
+                "appearance": "脑后两个旋，脑后靠近右耳处的发际上有个大拇指盖大的胎记。",
+                "missExperience": "失踪当天下午6时许，佳佳在饭店内并不宽敞的厅堂里跑着玩耍。爸爸去为他倒水喝。但当他在周围寻找时，已经没有儿子的身影。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/maoyi.jpg"
+            },
+            {
+                "name": "梦静",
+                "sex": "女",
+                "birthDate": "1992年8月13日",
+                "missDate": "1995年12月24日",
+                "missLocation": "贵州省遵义市湄潭县湄水桥",
+                "appearance": "瓜子脸，头发自然卷，双眼皮，眉毛处有一个伤疤。",
+                "missExperience": "当天晚上8点左右，梦静独自一人下楼寻找母亲，后来家长却在楼道口发现了梦静穿的一只白鞋掉了，就这样梦静消失的无影无踪。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/mengjing.jpg"
+            },
+            {
+                "name": "莫智扬",
+                "sex": "男",
+                "birthDate": "1987年9月5日",
+                "missDate": "1993年8月3日",
+                "missLocation": "贵州省贵阳市清镇市卫城镇新场坝路口",
+                "appearance": "肚脐右侧有一个和肚脐大小差不多的伤疤。左手食指第一个关节是弯曲的。前额和后脑勺都要比一般人稍微凸出。",
+                "missExperience": "1993年8月3日，莫智扬在新场坝路口等姐姐，（离家只有还不到三百米，连着125国道）后发现失踪，再无音讯。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/mozhiyang.jpg"
+            },
+            {
+                "name": "牛和翠",
+                "sex": "女",
+                "birthDate": "1956年7月13日",
+                "missDate": "1959年6月13日",
+                "missLocation": "湖北省武汉市江岸区四维街麟趾新村10号家门口",
+                "appearance": "大眼睛，双眼皮。",
+                "missExperience": "小孩从幼儿园自己跑回家，途中走失。",
+                "image": "http://image.uc.cn/s/uae/g/01/visual/18/baby/niuhecui.jpg"
+            }
+        ]
+        ,
+        "contact": "1840533（宝贝回家接待群QQ号码）"
+    };
+    window.FILTER = {};
+
+</script>
+<script src="public/18.js"></script>
+<script src="public/bundle.js"></script>
+<script async src="public/index_f125307.js"></script>
+</body>
+
+</html>
